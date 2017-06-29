@@ -1,0 +1,39 @@
+#ignore thumbnails created by windows
+Thumbs.db
+#Ignore files build by Visual Studio
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.bak
+*.cache
+*.ilk
+*.log
+*.suo
+*.sbr
+*.obj
+*.pdb
+*.tlb
+*.tlh
+*.lib
+*.tmp
+*.csproj.user
+*.Publish.xml
+[Dd]ebug*/
+[Oo]bj
+[Rr]elease*/
+_ReSharper*/
+Resources/
+PrecompiledWeb/
+TVProcessor/bin
+Installer/Installer/
+
+# Nuget
+packages/
+
+# Visual Studio 2015 build-related files folder
+.vs/
