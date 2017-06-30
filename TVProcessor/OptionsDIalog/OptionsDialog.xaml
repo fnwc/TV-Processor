@@ -1,0 +1,29 @@
+﻿<Window x:Class="TVProcessor.OptionsDIalog.OptionsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TVProcessor.OptionsDIalog"
+        mc:Ignorable="d"
+        Title="Options" Height="300" Width="300">
+    <Grid Margin="0,0,-0.4,-28">
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0,0,0,28">
+            <TabItem Header="Options 1">
+                <Grid>
+                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="74,44,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="74,74,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="23" Margin="74,104,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Options 2">
+                <Grid>
+                    <RadioButton x:Name="radioButton" Content="RadioButton" HorizontalAlignment="Left" Margin="60,55,0,0" VerticalAlignment="Top"/>
+                    <RadioButton x:Name="radioButton_Copy" Content="RadioButton" HorizontalAlignment="Left" Margin="60,75,0,0" VerticalAlignment="Top"/>
+                    <RadioButton x:Name="radioButton_Copy1" Content="RadioButton" HorizontalAlignment="Left" Margin="60,95,0,0" VerticalAlignment="Top"/>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+        
+    </Grid>
+</Window>

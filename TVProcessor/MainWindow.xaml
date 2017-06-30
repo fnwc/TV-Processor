@@ -3,22 +3,22 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		Title="TV Show Processor" Height="912.143" Width="890" Left="30" Top="30">
     <Grid>
-        <TabControl HorizontalAlignment="Left" Height="141" Margin="10,10,0,0" VerticalAlignment="Top" Width="863">
+        <Menu DockPanel.Dock="Top" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Options" Click="File_Options_Click" />
+                <Separator />
+                <MenuItem Header="_Exit" Click="File_Exit_Click" />
+            </MenuItem>
+        </Menu>
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Top"  Height="141" Margin="10,20,10,0">
             <TabItem Header="Copy From Charon">
                 <Grid>
-                    <Canvas x:Name="DirectoryDropZone" AllowDrop="True" HorizontalAlignment="Stretch" Height="100" Margin="0,0,244.8,0" VerticalAlignment="Top" Background="Transparent">
-                        <Rectangle Fill="LightGreen" Height="100" Stroke="DarkGreen" StrokeThickness="3" Width="586" Canvas.Top="6" Canvas.Left="4">
-                            <Rectangle.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
-                        <TextBlock x:Name="DirectorySourceText" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" FontSize="18" Text="Drag and drop the subdirectory here; or =&gt;" VerticalAlignment="Stretch" Canvas.Left="14" Height="26" Width="565" Canvas.Top="43"/>
-                    </Canvas>
-                    <Button x:Name="RunEntireFolder" Content="Run on entire Download Folder" HorizontalAlignment="Left" Margin="594,6,0,0" VerticalAlignment="Top" Height="100" Click="RunEntireFolder_Click" Width="253"/>
+                    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="2" BorderBrush="Black" Margin="0,0,270,0">
+                        <Canvas x:Name="DirectoryDropZone" AllowDrop="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Background="LightGreen">
+                            <TextBlock x:Name="DirectorySourceText" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" FontSize="18" Text="Drag and drop the subdirectory here; or =&gt;" VerticalAlignment="Stretch" Canvas.Left="14" Height="26" Width="565" Canvas.Top="43"/>
+                        </Canvas>
+                    </Border>
+                    <Button x:Name="RunEntireFolder" Content="Run on entire Download Folder" HorizontalAlignment="Stretch" Margin="590,0,0,0" VerticalAlignment="Stretch"  Click="RunEntireFolder_Click" />
                 </Grid>
             </TabItem>
             <TabItem Header="Copy To Persephone">
@@ -27,11 +27,11 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <ScrollViewer x:Name="Output" Margin="10,156,10.2,179" Background="Black" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible">
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <ScrollViewer x:Name="Output" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="500" Margin="10,170,10,0" Background="Black" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         </ScrollViewer>
-        <ScrollViewer x:Name="Error" Margin="10,708,10,10" Background="Black" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible">
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <ScrollViewer x:Name="Error" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,680,10,10" Background="Black" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         </ScrollViewer>
     </Grid>
 </Window>

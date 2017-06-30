@@ -18,6 +18,7 @@ using System.Threading;
 using System.Configuration;
 using System.Globalization;
 using Parago.Windows;
+using TVProcessor.OptionsDIalog;
 
 namespace TVProcessor
 {
@@ -396,6 +397,17 @@ namespace TVProcessor
             // flush output
             FlushMessages(Output, _currentMessages);
             FlushMessages(Error, _currentErrors);
+        }
+
+        private void File_Options_Click(object sender, RoutedEventArgs e)
+        {
+            var options = new OptionsDialog();
+            options.Show();
+        }
+
+        private void File_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
