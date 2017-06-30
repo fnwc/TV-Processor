@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TVProcessor", "TVProcessor\TVProcessor.csproj", "{07A9DA4F-1A61-4A31-991D-11C39982521F}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupWizard", "SetupWizard\SetupWizard.vdproj", "{E27BD254-F51B-4614-8C69-4E79DEC96DC7}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{3B61A573-9E96-49AD-BBA4-FE06EA0377D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,11 +26,11 @@ Global
 		{07A9DA4F-1A61-4A31-991D-11C39982521F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{07A9DA4F-1A61-4A31-991D-11C39982521F}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{07A9DA4F-1A61-4A31-991D-11C39982521F}.SingleImage|Any CPU.Build.0 = Release|Any CPU
-		{E27BD254-F51B-4614-8C69-4E79DEC96DC7}.CD_ROM|Any CPU.ActiveCfg = Release
-		{E27BD254-F51B-4614-8C69-4E79DEC96DC7}.Debug|Any CPU.ActiveCfg = Debug
-		{E27BD254-F51B-4614-8C69-4E79DEC96DC7}.DVD-5|Any CPU.ActiveCfg = Debug
-		{E27BD254-F51B-4614-8C69-4E79DEC96DC7}.Release|Any CPU.ActiveCfg = Release
-		{E27BD254-F51B-4614-8C69-4E79DEC96DC7}.SingleImage|Any CPU.ActiveCfg = Release
+		{3B61A573-9E96-49AD-BBA4-FE06EA0377D9}.CD_ROM|Any CPU.ActiveCfg = Release
+		{3B61A573-9E96-49AD-BBA4-FE06EA0377D9}.Debug|Any CPU.ActiveCfg = Debug
+		{3B61A573-9E96-49AD-BBA4-FE06EA0377D9}.DVD-5|Any CPU.ActiveCfg = Debug
+		{3B61A573-9E96-49AD-BBA4-FE06EA0377D9}.Release|Any CPU.ActiveCfg = Release
+		{3B61A573-9E96-49AD-BBA4-FE06EA0377D9}.SingleImage|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
