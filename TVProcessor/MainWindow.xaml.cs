@@ -168,7 +168,8 @@ namespace TVProcessor
                             // special: delete .actors folder in target
                             foreach (var deleteDir in _downloadingDirectory.GetDirectories(".actors", SearchOption.AllDirectories))
                             {
-                                try {
+                                try
+                                {
                                     deleteDir.Delete(true);
                                 }
                                 catch (Exception e)
@@ -251,7 +252,7 @@ namespace TVProcessor
                 directoryToMatch1 = sub1;
                 directoryToMatch2 = sub2;
             }
-            else if(default1 != _processingFolder && default2 != _processingFolder)
+            else if (default1 != _processingFolder && default2 != _processingFolder)
             {
                 // failed to find matching diretories
                 WriteMessage(String.Format("Unable to find matching directories, from \"{0}{2}\"  to \"{1}{2}\".", default1.FullName, default2.FullName, d.Name), OutputType.Error);

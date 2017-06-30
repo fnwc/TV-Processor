@@ -39,7 +39,10 @@ namespace Parago.Windows
 		{
 			InitializeComponent();
 
-			double top;
+            this.ShowInTaskbar = false;
+
+
+            double top;
 			double right;
 
 			if(settings == null)
