@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TVProcessor.OptionsDIalog"
         mc:Ignorable="d"
-        Title="Options" Height="300" Width="300">
+        Title="Options" Height="300" Width="300" WindowStartupLocation="CenterOwner">
     <Grid Margin="0,0,-0.4,-28">
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0,0,0,28">
             <TabItem Header="Options 1">

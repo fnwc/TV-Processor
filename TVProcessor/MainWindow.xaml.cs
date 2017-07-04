@@ -438,7 +438,7 @@ namespace TVProcessor
 
         private void File_Options_Click(object sender, RoutedEventArgs e)
         {
-            var options = new OptionsDialog();
+            var options = new OptionsDialog() { Owner = this };
             options.Show();
         }
 
