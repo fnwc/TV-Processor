@@ -38,6 +38,8 @@ namespace TVProcessor
         public string[] _extensionsToCopy = new string[] { ".mp4", ".mpeg", ".mpg", ".avi", ".ts", ".mkv" }; // lower case only
         public List<KeyValuePair<OutputType, string>> _currentMessages = new List<KeyValuePair<OutputType, string>>();
         public List<KeyValuePair<OutputType, string>> _currentErrors = new List<KeyValuePair<OutputType, string>>();
+        public Dictionary<string, int> _processedShows = new Dictionary<string, int>();
+
         public enum OutputType { Normal, Error }
         public enum TargetMediaType
         {
@@ -84,11 +86,21 @@ namespace TVProcessor
                             if (processingDirectorySeasonFolder == null)
                                 processingDirectorySeasonFolder = _processingDirectory.CreateSubdirectory(file.Directory.Name);
 
-                            // move file
+                            // verify season folder exists
                             if (processingDirectorySeasonFolder != null)
                             {
-                                if (!_isReadOnly) file.MoveTo(System.IO.Path.Combine(processingDirectorySeasonFolder.FullName, file.Name.Replace(' ', '.')));
-                                WriteMessage(String.Format("Moved file to {0}", file.FullName));
+                                if (!_isReadOnly)
+                                {
+                                    // move file
+                                    file.MoveTo(System.IO.Path.Combine(processingDirectorySeasonFolder.FullName, file.Name.Replace(' ', '.')));
+                                    WriteMessage($"Moved file to {file.FullName}");
+
+                                    // increment count
+                                    if (_processedShows.ContainsKey(_downloadingDirectory.Name)) _processedShows[_downloadingDirectory.Name]++;
+                                    else _processedShows.Add(_downloadingDirectory.Name, 1);
+                                }
+                                else
+                                    WriteMessage($"Could not move read-only file {file.FullName}", OutputType.Error);
                             }
                         }
                     }
@@ -234,6 +246,16 @@ namespace TVProcessor
 
                 // clear output & process
                 ClearMessages();
+
+                // show progress handler
+                var result = ProgressDialog.Execute(this, "Running Script...", (bw, we) =>
+                {
+                    // process
+                    ProcessDirectories();
+                });
+
+                // show results
+                if (!result.OperationFailed) ShowPostProcessMessages();
             }
         }
 
@@ -357,7 +379,7 @@ namespace TVProcessor
             ClearMessages();
 
             // show progress handler
-            ProgressDialog.Execute(this, "Running Script...", (bw, we) =>
+            var result = ProgressDialog.Execute(this, "Running Script...", (bw, we) =>
             {
                 // tracking for progress
                 int count = 0;
@@ -394,9 +416,24 @@ namespace TVProcessor
 
             }, new ProgressDialogSettings(true, true, false));
 
+            // show results
+            if (!result.OperationFailed) ShowPostProcessMessages();
+        }
+
+        private void ShowPostProcessMessages()
+        {
             // flush output
             FlushMessages(Output, _currentMessages);
             FlushMessages(Error, _currentErrors);
+
+            // flush processed shows
+            var sb = new System.Text.StringBuilder();
+            foreach (var show in _processedShows)
+            {
+                sb.Append($"{show.Key}: {show.Value} episodes\n");
+            }
+            if (sb.Length > 0) MessageBox.Show("Processed:\n============\n\n" + sb.ToString());
+            _processedShows.Clear();
         }
 
         private void File_Options_Click(object sender, RoutedEventArgs e)
