@@ -112,7 +112,7 @@ namespace TVProcessor
                         int timeout = 30000;
                         var output = new StringBuilder();
                         var error = new StringBuilder();
-                        string args = String.Format(@"""{0}"" ""{1}"" {2} /CREATE /E", _processingDirectory.FullName, _downloadingDirectory.FullName, String.Join(" ", _extensionsToCopy.Select(o => "*" + o)));
+                        string args = String.Format(@"""{0}"" ""{1}"" {2} /CREATE /E /XD .actors", _processingDirectory.FullName, _downloadingDirectory.FullName, String.Join(" ", _extensionsToCopy.Select(o => "*" + o)));
                         if (!_isReadOnly)
                         {
                             var p = new Process()
