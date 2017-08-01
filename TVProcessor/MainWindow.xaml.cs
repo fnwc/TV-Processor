@@ -35,7 +35,7 @@ namespace TVProcessor
         public DirectoryInfo _processingFolder = new DirectoryInfo(Properties.Settings.Default.ProcessingFolderRequiredPrefix);
         public Dictionary<TargetMediaType, DirectoryInfo> _targetFolders = new Dictionary<TargetMediaType, DirectoryInfo>();
         public CultureInfo _currentCulture = new CultureInfo("en-US");
-        public string[] _extensionsToCopy = new string[] { ".mp4", ".mpeg", ".mpg", ".avi", ".ts", ".mkv" }; // lower case only
+        public string[] _extensionsToCopy = new string[] { ".mp4", ".mpeg", ".mpg", ".avi", ".ts", ".mkv", ".flv" }; // lower case only
         public List<KeyValuePair<OutputType, string>> _currentMessages = new List<KeyValuePair<OutputType, string>>();
         public List<KeyValuePair<OutputType, string>> _currentErrors = new List<KeyValuePair<OutputType, string>>();
         public Dictionary<string, int> _processedShows = new Dictionary<string, int>();
@@ -64,7 +64,7 @@ namespace TVProcessor
             {
                 if (!folder.Exists)
                 {
-                    MessageBox.Show($"The default folder \"{folder.FullName}\" does not exist or is not accessible. Please check your aplication configuration settings.", "Invalid Directory");
+                    MessageBox.Show($"The default folder \"{folder.FullName}\" does not exist or is not accessible. Please check your application configuration settings.", "Invalid Directory");
                     SetFormState(false);
                 }
             }
