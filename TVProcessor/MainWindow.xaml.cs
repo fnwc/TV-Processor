@@ -18,7 +18,7 @@ using System.Threading;
 using System.Configuration;
 using System.Globalization;
 using Parago.Windows;
-using TVProcessor.OptionsDIalog;
+using TVProcessor.OptionsDialog;
 
 namespace TVProcessor
 {
@@ -438,7 +438,7 @@ namespace TVProcessor
 
         private void File_Options_Click(object sender, RoutedEventArgs e)
         {
-            var options = new OptionsDialog() { Owner = this };
+            var options = new OptionsDialog.OptionsDialog() { Owner = this };
             options.Show();
         }
 

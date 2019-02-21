@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace TVProcessor.OptionsDIalog
+namespace TVProcessor.OptionsDialog
 {
     /// <summary>
     /// Interaction logic for OptionsDialog.xaml
