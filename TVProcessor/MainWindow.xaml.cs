@@ -19,6 +19,7 @@ using System.Configuration;
 using System.Globalization;
 using Parago.Windows;
 using TVProcessor.OptionsDialog;
+using Common;
 
 namespace TVProcessor
 {
@@ -72,12 +73,13 @@ namespace TVProcessor
 
         public void ProcessDirectories()
         {
-            try
+            if (_downloadingDirectory != null && _downloadingDirectory.Exists && _processingDirectory != null && _processingDirectory.Exists)
             {
-                if (_downloadingDirectory != null && _downloadingDirectory.Exists && _processingDirectory != null && _processingDirectory.Exists)
+
+                // first get files to move that are nonzero in size (downloading to processing)
+                foreach (var file in _downloadingDirectory.GetFiles("*", SearchOption.AllDirectories).Where(o => _extensionsToCopy.Contains(o.Extension.ToLower()) && o.Length > 0 && o.Exists))
                 {
-                    // first get files to move that are nonzero in size (downloading to processing)
-                    foreach (var file in _downloadingDirectory.GetFiles("*", SearchOption.AllDirectories).Where(o => _extensionsToCopy.Contains(o.Extension.ToLower()) && o.Length > 0 && o.Exists))
+                    try
                     {
                         // look for Season folder in processing directory, if it doesn't exist, create
                         if (file.Directory.Name.StartsWith("Season"))
@@ -105,15 +107,39 @@ namespace TVProcessor
                         }
                     }
 
-                    // test directory to make sure we need to mirror back
-                    if (_processingDirectory.GetFiles("*", SearchOption.AllDirectories).Where(o => _extensionsToCopy.Contains(o.Extension.ToLower()) && o.Length > 0 && o.Exists).Any())
+                    catch (Exception ex)
                     {
-                        // use ROBOCOPY to do actual mirroring
-                        int timeout = 30000;
-                        var output = new StringBuilder();
-                        var error = new StringBuilder();
-                        string args = String.Format(@"""{0}"" ""{1}"" {2} /CREATE /E /XD .actors", _processingDirectory.FullName, _downloadingDirectory.FullName, String.Join(" ", _extensionsToCopy.Select(o => "*" + o)));
-                        if (!_isReadOnly)
+                        WriteMessage($"Error moving file {file.Name}: {ex.Message}", OutputType.Error);
+                    }
+                }
+
+                // test directory to make sure we need to mirror back
+                if (_processingDirectory.GetFiles("*", SearchOption.AllDirectories).Where(o => _extensionsToCopy.Contains(o.Extension.ToLower()) && o.Length > 0 && o.Exists).Any())
+                {
+                    // use ROBOCOPY to do actual mirroring
+                    int timeout = 30000;
+                    var output = new StringBuilder();
+                    var error = new StringBuilder();
+                    string args = String.Format(@"""{0}"" ""{1}"" {2} /CREATE /E /XD .actors", _processingDirectory.FullName, _downloadingDirectory.FullName, String.Join(" ", _extensionsToCopy.Select(o => "*" + o)));
+                    if (!_isReadOnly)
+                    {
+                        // rename by alias
+                        foreach (var f in _processingDirectory.GetFiles("*", SearchOption.AllDirectories).Where(o => _extensionsToCopy.Contains(o.Extension.ToLower()) && o.Length > 0 && o.Exists))
+                        {
+                            var newName = ShowAliases.RenameByAlias(f.Name);
+                            try
+                            {
+                                var newNameAndPath = System.IO.Path.Combine(f.DirectoryName, newName);
+                                f.MoveTo(newNameAndPath);
+                            }
+                            catch (Exception e)
+                            {
+                                WriteMessage($"Unable to move file '{f.Name}' to '{newName}': {e.Message}", OutputType.Error);
+                            }
+                        }
+
+                        // start copy process
+                        try
                         {
                             var p = new Process()
                             {
@@ -173,38 +199,38 @@ namespace TVProcessor
                                     // Timed out.
                                 }
                             }
+                        }
+                        catch (Exception ex)
+                        {
+                            WriteMessage(ex.Message, OutputType.Error);
+                        }
 
-                            // handle output
-                            WriteMessage(output.ToString());
-                            WriteMessage(error.ToString(), OutputType.Error);
+                        // handle output
+                        WriteMessage(output.ToString());
+                        WriteMessage(error.ToString(), OutputType.Error);
 
-                            // special: delete .actors folder in target
-                            foreach (var deleteDir in _downloadingDirectory.GetDirectories(".actors", SearchOption.AllDirectories))
+                        // special: delete .actors folder in target
+                        foreach (var deleteDir in _downloadingDirectory.GetDirectories(".actors", SearchOption.AllDirectories))
+                        {
+                            try
                             {
-                                try
-                                {
-                                    deleteDir.Delete(true);
-                                }
-                                catch (Exception e)
-                                {
-                                    WriteMessage($"Can't delete folder {deleteDir.FullName}: {e.Message}", OutputType.Error);
-                                }
+                                deleteDir.Delete(true);
+                            }
+                            catch (Exception e)
+                            {
+                                WriteMessage($"Can't delete folder {deleteDir.FullName}: {e.Message}", OutputType.Error);
                             }
                         }
-                        else
-                        {
-                            // debug show what robocopy command would have been run
-                            WriteMessage(args);
-                        }
+                    }
+                    else
+                    {
+                        // debug show what robocopy command would have been run
+                        WriteMessage(args);
                     }
                 }
-                else
-                    WriteMessage("Please drop a valid subdirectory to begin.", OutputType.Error);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("The exception occurred: " + ex.Message, "Exception Occurred");
-            }
+            else
+                WriteMessage("Please drop a valid subdirectory to begin.", OutputType.Error);
         }
 
         public void DirectoryDropZone_Drop(object sender, DragEventArgs e)
