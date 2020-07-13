@@ -12,7 +12,7 @@ namespace TVProcessor.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.6.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,7 +25,7 @@ namespace TVProcessor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\\\charon\\Downloads\\Finished\\TV\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\192.168.0.4\\DL\\media\\completed\\TV\\")]
         public string DownloadingFolderRequiredPrefix {
             get {
                 return ((string)(this["DownloadingFolderRequiredPrefix"]));
@@ -34,16 +34,7 @@ namespace TVProcessor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\\\192.168.1.203\\TV Documentaries\\")]
-        public string TVShowFolderRequiredPrefix {
-            get {
-                return ((string)(this["TVShowFolderRequiredPrefix"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\\\192.168.1.203\\TV\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\192.168.0.4\\TV\\")]
         public string TVDocumentaryShowFolderRequiredPrefix {
             get {
                 return ((string)(this["TVDocumentaryShowFolderRequiredPrefix"]));
@@ -52,10 +43,19 @@ namespace TVProcessor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\\\charon\\Downloads\\Finished\\TV Process\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\192.168.0.4\\DL\\media\\completed\\TV Process\\")]
         public string ProcessingFolderRequiredPrefix {
             get {
                 return ((string)(this["ProcessingFolderRequiredPrefix"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\192.168.0.4\\TV\\")]
+        public string TVShowFolderRequiredPrefix {
+            get {
+                return ((string)(this["TVShowFolderRequiredPrefix"]));
             }
         }
     }
